@@ -1,17 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import MomentUtils from "@date-io/moment";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { SnackbarProvider } from "notistack";
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { Router } from "react-router-dom";
+import App from "./Application/App";
+import store from "./Application/Redux/Store/Store";
+import history from "./Application/Services/HistoryService";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const theme = createMuiTheme({
+  palette: { primary: { main: "#2AA9C5" } },
+  background: "#EFEFEF",
+  overrides: {},
+  props: {
+    MuiButtonBase: {
+      disableRipple: true,
+    },
+  },
+});
+
+render(
+  <SnackbarProvider maxSnack={3}>
+    <Provider store={store}>
+      <MuiPickersUtilsProvider utils={MomentUtils}>
+        <ThemeProvider theme={theme}>
+          <Router history={history}>
+            <App />
+          </Router>
+        </ThemeProvider>
+      </MuiPickersUtilsProvider>
+    </Provider>
+  </SnackbarProvider>,
+  document.getElementById("app")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();

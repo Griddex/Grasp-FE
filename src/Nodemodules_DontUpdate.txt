@@ -1,0 +1,4 @@
+Don't update below modules from NPM
+because they have been manually tweaked
+
+react-pro-sidebar

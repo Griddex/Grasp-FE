@@ -1,0 +1,11 @@
+Logging: every action goes through this middleware, so we can log its type and payload for debugging or tracking purposes.
+
+Error tracking: if any asynchronous action returned an error, this middleware can display a notification.
+
+Caching: Only call your API for the same action once, and cache the result for future calls.
+
+Auth requests: For API calls, apply an authentication token before sending out the request.
+
+Crash Reporter:
+
+_PENDING, _FULFILLED, _REJECTED
