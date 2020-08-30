@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="207.036" height="250.93" viewBox="0 0 207.036 240.93">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="1" x2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#b3b3b3"/>
+      <stop offset="0.205" stop-color="#afafaf"/>
+      <stop offset="0.379" stop-color="#a5a5a5"/>
+      <stop offset="0.542" stop-color="#939393"/>
+      <stop offset="0.698" stop-color="#7a7a7a"/>
+      <stop offset="0.849" stop-color="#5b5b5b"/>
+      <stop offset="0.995" stop-color="#343434"/>
+      <stop offset="1" stop-color="#333"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" y1="1" x2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#b3b3b3"/>
+      <stop offset="0.145" stop-color="#a8a8a8"/>
+      <stop offset="0.393" stop-color="#8d8d8d"/>
+      <stop offset="0.713" stop-color="#606060"/>
+      <stop offset="1" stop-color="#333"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ef664b"/>
+      <stop offset="0.5" stop-color="#e40019"/>
+      <stop offset="1" stop-color="#c10a1e"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0.011" stop-color="#2ba3c0"/>
+      <stop offset="0.5" stop-color="#008aac"/>
+      <stop offset="0.994" stop-color="#006b71"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-5" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f57e3f"/>
+      <stop offset="0.5" stop-color="#f05c12"/>
+      <stop offset="1" stop-color="#ca4b1c"/>
+    </linearGradient>
+  </defs>
+  <g id="Logo_Group" transform="translate(-1525 -2055)">
+    <g id="GraspLoogo" transform="translate(3)">
+      <path id="Path_1" data-name="Path 1" d="M1580,2055v150l-30-30v-90Z" fill="url(#linear-gradient)"/>
+      <path id="Path_2" data-name="Path 2" d="M1700,2145v30l-30,30v-90Z" fill="url(#linear-gradient-2)"/>
+      <path id="Path_3" data-name="Path 3" d="M1700,2085H1550l30-30h120Z" fill="url(#linear-gradient-3)"/>
+      <path id="Path_4" data-name="Path 4" d="M1670,2205h-90l-30-30h150Z" fill="url(#linear-gradient-4)"/>
+      <path id="Path_5" data-name="Path 5" d="M1700,2145h-76v-30h46Z" fill="url(#linear-gradient-5)"/>
+    </g>
+    <text id="GRASP" transform="translate(1525 2267)" fill="#464749" font-size="44.641" font-family="SegoeUI, Segoe UI" letter-spacing="0.4em"><tspan x="0" y="0">GRASP</tspan></text>
+    <text id="BUSINESS_SOLUTIONS" data-name="BUSINESS SOLUTIONS" transform="translate(1527.036 2291.93)" fill="#818386" font-size="16.435" font-family="SegoeUI, Segoe UI" letter-spacing="0.15em"><tspan x="0" y="0">BUSINESS SOLUTIONS</tspan></text>
+  </g>
+</svg>
