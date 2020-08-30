@@ -5,7 +5,7 @@ import { SnackbarProvider } from "notistack";
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import App from "./Application/App";
 import store from "./Application/Redux/Store/Store";
 import history from "./Application/Services/HistoryService";
@@ -26,7 +26,7 @@ render(
     <Provider store={store}>
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <ThemeProvider theme={theme}>
-          <Router history={history} basename={process.env.PUBLIC_URL}>
+          <Router history={history}>
             <App />
           </Router>
         </ThemeProvider>

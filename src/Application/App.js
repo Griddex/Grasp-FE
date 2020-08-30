@@ -5,7 +5,6 @@ import HomeView from "./Views/HomeView";
 import ModulesView from "./Views/ModulesView";
 
 const App = () => {
-  console.log(process.env.PUBLIC_URL);
   return (
     <Switch>
       <Route exact path="/" component={HomeView} />
