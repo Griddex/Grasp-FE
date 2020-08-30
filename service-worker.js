@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Grasp-Frontend/precache-manifest.68ac6169bdfe8892fd3e6ab2a3f166bc.js"
+  "/Grasp-Frontend/precache-manifest.06eab33541a1f07be35d7f9d1db025dc.js"
 );
 
 self.addEventListener('message', (event) => {
