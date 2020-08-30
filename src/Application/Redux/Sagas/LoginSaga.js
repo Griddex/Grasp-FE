@@ -45,6 +45,7 @@ function* loginSaga(action) {
   }
 
   yield put(hideSpinnerAction());
+  yield call(forwardTo, "/grasp");
 }
 
 function forwardTo(viewUrl) {
