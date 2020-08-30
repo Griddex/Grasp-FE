@@ -1,18 +1,18 @@
 import { makeStyles } from "@material-ui/core/styles";
-import React from "react";
 import EmailIcon from "@material-ui/icons/Email";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
 import RecentActorsIcon from "@material-ui/icons/RecentActors";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
+import ContextDrawer from "../../../../Application/Components/ContextDrawer";
 import SubNavbar from "../../../../Application/Components/SubNavbar";
+import WorkflowStepper from "./../../../../Application/Components/WorkflowStepper";
 import PolicyAddView from "./AddWorkflow/PolicyAddView";
 import PolicyImportView from "./ImportWorkflow/PolicyImportView";
 import PolicyBackground from "./PolicyBackground";
-import { useSelector, useDispatch } from "react-redux";
-import ContextDrawer from "../../../../Application/Components/ContextDrawer";
-import WorkflowStepper from "./../../../../Application/Components/WorkflowStepper";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,9 +34,9 @@ const PolicyModule = (props) => {
   const classes = useStyles();
   const { url, path } = useRouteMatch();
 
-  const subNavbarPresent = useSelector(
-    (state) => state.layoutReducer.subNavbarPresent
-  );
+  // const subNavbarPresent = useSelector(
+  //   (state) => state.layoutReducer.subNavbarPresent
+  // );
 
   const contextDrawerPresent = useSelector(
     (state) => state.layoutReducer.contextDrawerPresent

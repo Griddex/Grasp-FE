@@ -7,10 +7,11 @@ const authMiddleware = () => (next) => (action) => {
   if (action.meta.addAuth) {
     const authToken = useSelector((state) => state.loginReducer.authToken);
 
+    const { payload } = action;
     const action = {
       ...action,
       payload: {
-        ...action.payload,
+        ...payload,
         authHeaders: {
           "Access-Control-Allow-Origin": "*",
           Accept: "application/json",

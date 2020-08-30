@@ -24,6 +24,7 @@ function* loginSaga(action) {
   const data = {
     title: companyIdentifier,
     body: userName,
+    password: password,
   };
   const config = { headers: null };
   const loginAPI = (url) => authService.post(url, data, config);

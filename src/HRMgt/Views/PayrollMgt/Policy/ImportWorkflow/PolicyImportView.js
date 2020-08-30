@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const PolicyImportView = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { url, path } = useRouteMatch();
 
   const showImportModulesView = useSelector(
