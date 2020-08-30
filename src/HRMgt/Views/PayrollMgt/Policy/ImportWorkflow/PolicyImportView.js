@@ -1,14 +1,12 @@
-import React from "react";
-import ModuleCard from "./../../../../../Application/Components/ModuleCard";
-import { useDispatch } from "react-redux";
-import { useRouteMatch } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Route, useRouteMatch } from "react-router-dom";
+import { ReactComponent as DatabaseLogo } from "../../../../../Application/Images/ImportImages/DatabaseImport.svg";
 import { ReactComponent as ExcelLogo } from "../../../../../Application/Images/ImportImages/ExcelImport.svg";
 import { ReactComponent as PowerpointLogo } from "../../../../../Application/Images/ImportImages/PowerpointImport.svg";
-import { ReactComponent as DatabaseLogo } from "../../../../../Application/Images/ImportImages/DatabaseImport.svg";
-import Grid from "@material-ui/core/Grid";
-import { useSelector } from "react-redux";
-import { Route } from "react-router-dom";
+import ModuleCard from "./../../../../../Application/Components/ModuleCard";
 import { importModulesCloseAction } from "./../../../../Redux/Actions/PayrollActions";
 
 const useStyles = makeStyles((theme) => ({

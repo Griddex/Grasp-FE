@@ -5,16 +5,16 @@ import { useSelector } from "react-redux";
 import { Route, useRouteMatch } from "react-router-dom";
 import ModuleCard from "../Components/ModuleCard";
 import { ReactComponent as Grasptitlelogo } from "../Images/Grasptitlelogo.svg";
-import { ReactComponent as AccountingLogo } from "../Images/ModulesViewImages/Accounting.svg";
-import { ReactComponent as CustomerRelationsManagementLogo } from "../Images/ModulesViewImages/CustomerRelationsManagement.svg";
-import { ReactComponent as FacilityManagementLogo } from "../Images/ModulesViewImages/FacilityManagement.svg";
-import { ReactComponent as FinanceLogo } from "../Images/ModulesViewImages/FinanceManagement.svg";
+// import { ReactComponent as AccountingLogo } from "../Images/ModulesViewImages/Accounting.svg";
+// import { ReactComponent as CustomerRelationsManagementLogo } from "../Images/ModulesViewImages/CustomerRelationsManagement.svg";
+// import { ReactComponent as FacilityManagementLogo } from "../Images/ModulesViewImages/FacilityManagement.svg";
+// import { ReactComponent as FinanceLogo } from "../Images/ModulesViewImages/FinanceManagement.svg";
 // import { ReactComponent as HumanResourcesLogo} from "../Images/ModulesViewImages/HumanResources.svg";
-import { ReactComponent as InventoryManagementLogo } from "../Images/ModulesViewImages/InventoryManagement.svg";
-import { ReactComponent as LogisiticsLogo } from "../Images/ModulesViewImages/LogisiticsManagement.svg";
-import { ReactComponent as ProjectManagementLogo } from "../Images/ModulesViewImages/ProjectManagement.svg";
+// import { ReactComponent as InventoryManagementLogo } from "../Images/ModulesViewImages/InventoryManagement.svg";
+// import { ReactComponent as LogisiticsLogo } from "../Images/ModulesViewImages/LogisiticsManagement.svg";
+// import { ReactComponent as ProjectManagementLogo } from "../Images/ModulesViewImages/ProjectManagement.svg";
 import Modules from "../Modules/Modules";
-import Image from "./../Components/Image";
+// import Image from "./../Components/Image";
 import { hideModulesViewAction } from "./../Redux/Actions/ModuleActions";
 
 const useStyles = makeStyles((theme) => ({

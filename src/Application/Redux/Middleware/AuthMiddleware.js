@@ -8,7 +8,7 @@ const authMiddleware = () => (next) => (action) => {
     const authToken = useSelector((state) => state.loginReducer.authToken);
 
     const { payload } = action;
-    const action = {
+    const actionAuth = {
       ...action,
       payload: {
         ...payload,
@@ -20,9 +20,8 @@ const authMiddleware = () => (next) => (action) => {
         },
       },
     };
+    return next(actionAuth);
   }
-
-  return next(action);
 };
 
 export default authMiddleware;

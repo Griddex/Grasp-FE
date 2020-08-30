@@ -2,13 +2,11 @@ import { Button, Toolbar } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouteMatch } from "react-router-dom";
-import history from "./../Services/HistoryService";
 //import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import clsx from "clsx";
+import React from "react";
+import { useSelector } from "react-redux";
+import history from "./../Services/HistoryService";
 
 const subNavBarWidth = 30;
 const subNavBarMarginTop = 46;
@@ -63,8 +61,8 @@ const useStyles = makeStyles((theme) => ({
 const SubNavbar = (props) => {
   const { subNavbarItems } = props;
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const { url, path } = useRouteMatch();
+  // const dispatch = useDispatch();
+  // const { url, path } = useRouteMatch();
   const mainDrawerOpen = useSelector(
     (state) => state.layoutReducer.mainDrawerExpanded
   );

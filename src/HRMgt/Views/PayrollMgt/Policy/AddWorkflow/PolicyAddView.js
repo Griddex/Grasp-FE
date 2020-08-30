@@ -1,12 +1,12 @@
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Route, useRouteMatch } from "react-router-dom";
+import { ReactComponent as AddInformationLogo } from "../../../../../Application/Images/AddImages/AddInformation.svg";
 import ModuleCard from "./../../../../../Application/Components/ModuleCard";
 import { importModulesCloseAction } from "./../../../../Redux/Actions/PayrollActions";
 import PolicyAddViewWorkflow from "./PolicyAddViewWorkflow";
-import { ReactComponent as AddInformationLogo } from "../../../../../Application/Images/AddImages/AddInformation.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {

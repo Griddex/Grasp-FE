@@ -5,7 +5,7 @@ import FlagIcon from "@material-ui/icons/Flag";
 import MenuIcon from "@material-ui/icons/Menu";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import SearchIcon from "@material-ui/icons/Search";
-import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
+// import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import ViewModuleIcon from "@material-ui/icons/ViewModule";
 import React from "react";
