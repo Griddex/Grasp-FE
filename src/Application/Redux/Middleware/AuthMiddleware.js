@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 
 const authMiddleware = () => (next) => (action) => {
+  console.log("Logged output -->: authMiddleware -> action", action);
   const falsies = [null, undefined, false, ""];
   if (falsies.some((value) => value === action.meta)) return next(action);
 
@@ -22,6 +23,7 @@ const authMiddleware = () => (next) => (action) => {
     };
     return next(actionAuth);
   }
+  return next(action);
 };
 
 export default authMiddleware;

@@ -50,6 +50,10 @@ export const LoginForm = () => {
           password: Yup.string().required("Password is required"),
         })}
         onSubmit={({ companyIdentifier, userName, password }) => {
+          console.log(
+            "Logged output -->: LoginForm -> companyIdentifier",
+            companyIdentifier
+          );
           dispatch(loginAction(companyIdentifier, userName, password));
         }}
       >

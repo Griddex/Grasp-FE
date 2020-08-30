@@ -16,15 +16,15 @@ export default function* watchLoginSaga() {
 }
 
 function* loginSaga(action) {
+  console.log("Logged output -->: function*loginSaga -> action", action);
   yield put(showSpinnerAction());
 
   const { payload } = action;
-  const { companyIdentifier, userName, password } = payload;
+  const { companyIdentifier, userName } = payload;
 
   const data = {
     title: companyIdentifier,
     body: userName,
-    password: password,
   };
   const config = { headers: null };
   const loginAPI = (url) => authService.post(url, data, config);
@@ -45,7 +45,6 @@ function* loginSaga(action) {
   }
 
   yield put(hideSpinnerAction());
-  yield call(forwardTo, "/grasp");
 }
 
 function forwardTo(viewUrl) {
