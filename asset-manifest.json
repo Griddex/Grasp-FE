@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Grasp-Frontend/static/css/main.b5648c3e.chunk.css",
-    "main.js": "/Grasp-Frontend/static/js/main.ba431b66.chunk.js",
-    "main.js.map": "/Grasp-Frontend/static/js/main.ba431b66.chunk.js.map",
+    "main.js": "/Grasp-Frontend/static/js/main.667295a8.chunk.js",
+    "main.js.map": "/Grasp-Frontend/static/js/main.667295a8.chunk.js.map",
     "runtime-main.js": "/Grasp-Frontend/static/js/runtime-main.a034c6e2.js",
     "runtime-main.js.map": "/Grasp-Frontend/static/js/runtime-main.a034c6e2.js.map",
     "static/js/2.b0bcb409.chunk.js": "/Grasp-Frontend/static/js/2.b0bcb409.chunk.js",
     "static/js/2.b0bcb409.chunk.js.map": "/Grasp-Frontend/static/js/2.b0bcb409.chunk.js.map",
     "index.html": "/Grasp-Frontend/index.html",
-    "precache-manifest.36e3ac254ef473ed7af3b55b4a6a53b2.js": "/Grasp-Frontend/precache-manifest.36e3ac254ef473ed7af3b55b4a6a53b2.js",
+    "precache-manifest.68ac6169bdfe8892fd3e6ab2a3f166bc.js": "/Grasp-Frontend/precache-manifest.68ac6169bdfe8892fd3e6ab2a3f166bc.js",
     "service-worker.js": "/Grasp-Frontend/service-worker.js",
     "static/css/main.b5648c3e.chunk.css.map": "/Grasp-Frontend/static/css/main.b5648c3e.chunk.css.map",
     "static/js/2.b0bcb409.chunk.js.LICENSE.txt": "/Grasp-Frontend/static/js/2.b0bcb409.chunk.js.LICENSE.txt",
@@ -31,6 +31,6 @@
     "static/js/runtime-main.a034c6e2.js",
     "static/js/2.b0bcb409.chunk.js",
     "static/css/main.b5648c3e.chunk.css",
-    "static/js/main.ba431b66.chunk.js"
+    "static/js/main.667295a8.chunk.js"
   ]
 }
