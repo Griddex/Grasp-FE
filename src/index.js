@@ -26,7 +26,7 @@ render(
     <Provider store={store}>
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <ThemeProvider theme={theme}>
-          <Router history={history}>
+          <Router history={history} basename={process.env.PUBLIC_URL}>
             <App />
           </Router>
         </ThemeProvider>
