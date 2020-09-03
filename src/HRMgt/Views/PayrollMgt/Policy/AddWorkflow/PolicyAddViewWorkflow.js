@@ -151,6 +151,48 @@ const PolicyAddViewWorkflow = () => {
   } = policyData;
 
   const values = ["hello", "Hi", "Welcome"];
+  const sendSaveDialogContent = (props) => {
+    const {
+      policyOwner,
+      policyOrigin,
+      policyAudience,
+      policyName,
+      policyInitiator,
+    } = props;
+
+    return (
+      <>
+        <div className={classes.sideBySide}>
+          <h4>Policy Owner:</h4>
+          <h4>{policyOwner}</h4>
+        </div>
+        <div className={classes.sideBySide}>
+          <h4>Policy Origin:</h4>
+          <h4>{policyOrigin}</h4>
+        </div>
+        <div className={classes.sideBySide}>
+          <h4>Policy Audience:</h4>
+          <h4>{policyAudience}</h4>
+        </div>
+        <div className={classes.sideBySide}>
+          <h4>Policy Name:</h4>
+          <h4>{policyName}</h4>
+        </div>
+        <div className={classes.sideBySide}>
+          <h4>Policy Statement:</h4>
+          <OpenInNewOutlinedIcon className={classes.openInNewOutlinedIcon} />
+        </div>
+        <div className={classes.sideBySide}>
+          <h4>Policy Owner:</h4>
+          <h4>{policyInitiator}</h4>
+        </div>
+        <div className={classes.sideBySide}>
+          <h4>Policy Owner:</h4>
+          <h4>{policyInitiator}</h4>
+        </div>
+      </>
+    );
+  };
 
   const ResetPolicyDialogContent = () => {
     return (
@@ -191,44 +233,11 @@ const PolicyAddViewWorkflow = () => {
   };
 
   const SavePolicyDialogContent = (props) => {
-    const {
-      policyOwner,
-      policyOrigin,
-      policyAudience,
-      policyName,
-      policyStatement,
-      policyInitiator,
-      policyAssurance,
-    } = props;
-
     return (
       <div>
         <h4>Do you want to save the following draft pay policy?</h4>
         <h4>Summary</h4>
-        <div className={classes.sideBySide}>
-          <h4>Policy Owner:</h4>
-          <h4>{policyOwner}</h4>
-        </div>
-        <div className={classes.sideBySide}>
-          <h4>Policy Origin:</h4>
-          <h4>{policyOrigin}</h4>
-        </div>
-        <div className={classes.sideBySide}>
-          <h4>Policy Audience:</h4>
-          <h4>{policyAudience}</h4>
-        </div>
-        <div className={classes.sideBySide}>
-          <h4>Policy Name:</h4>
-          <h4>{policyName}</h4>
-        </div>
-        <div className={classes.sideBySide}>
-          <h4>Policy Statement:</h4>
-          <OpenInNewOutlinedIcon className={classes.openInNewOutlinedIcon} />
-        </div>
-        <div className={classes.sideBySide}>
-          <h4>Policy Owner:</h4>
-          <h4>{policyInitiator}</h4>
-        </div>
+        {sendSaveDialogContent(props)}
       </div>
     );
   };
@@ -264,44 +273,10 @@ const PolicyAddViewWorkflow = () => {
   };
 
   const SendPolicyDialogContent = (props) => {
-    const {
-      policyOwner,
-      policyOrigin,
-      policyAudience,
-      policyName,
-      policyStatement,
-      policyInitiator,
-      policyAssurance,
-    } = props;
-
     return (
       <div>
         <h4>Do you want to save the following draft pay policy?</h4>
-        <h4>Summary</h4>
-        <div className={classes.sideBySide}>
-          <h4>Policy Owner:</h4>
-          <h4>{policyOwner}</h4>
-        </div>
-        <div className={classes.sideBySide}>
-          <h4>Policy Origin:</h4>
-          <h4>{policyOrigin}</h4>
-        </div>
-        <div className={classes.sideBySide}>
-          <h4>Policy Audience:</h4>
-          <h4>{policyAudience}</h4>
-        </div>
-        <div className={classes.sideBySide}>
-          <h4>Policy Name:</h4>
-          <h4>{policyName}</h4>
-        </div>
-        <div className={classes.sideBySide}>
-          <h4>Policy Statement:</h4>
-          <OpenInNewOutlinedIcon className={classes.openInNewOutlinedIcon} />
-        </div>
-        <div className={classes.sideBySide}>
-          <h4>Policy Owner:</h4>
-          <h4>{policyInitiator}</h4>
-        </div>
+        {sendSaveDialogContent(props)}
       </div>
     );
   };
@@ -421,14 +396,11 @@ const PolicyAddViewWorkflow = () => {
               policyDate,
               policyStatement,
               policyInitiator,
-              policyAssurance,
             },
             errors,
             touched,
             handleChange,
-            isValid,
             handleSubmit,
-            status,
           } = props;
 
           return (

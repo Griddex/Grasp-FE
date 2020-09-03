@@ -19,7 +19,6 @@ const dialogTitleStyles = (theme) => ({
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
-    width: "5%",
     width: 30,
     height: 30,
   },

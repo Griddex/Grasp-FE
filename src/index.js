@@ -1,7 +1,7 @@
-// import "date-fns";
-// import DateFnsUtils from "@date-io/date-fns";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import DateFnsUtils from "@date-io/date-fns";
+import { ThemeProvider } from "@material-ui/core";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import "date-fns";
 import { SnackbarProvider } from "notistack";
 import React from "react";
 import { render } from "react-dom";
@@ -15,13 +15,13 @@ import theme from "./Application/Theme/Theme";
 render(
   <SnackbarProvider maxSnack={3}>
     <Provider store={store}>
-      {/* <MuiPickersUtilsProvider utils={DateFnsUtils}> */}
-      <ThemeProvider theme={theme}>
-        <Router history={history}>
-          <App />
-        </Router>
-      </ThemeProvider>
-      {/* </MuiPickersUtilsProvider> */}
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <ThemeProvider theme={theme}>
+          <Router history={history}>
+            <App />
+          </Router>
+        </ThemeProvider>
+      </MuiPickersUtilsProvider>
     </Provider>
   </SnackbarProvider>,
   document.getElementById("app")

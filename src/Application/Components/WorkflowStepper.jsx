@@ -4,7 +4,6 @@ import StepLabel from "@material-ui/core/StepLabel";
 import Stepper from "@material-ui/core/Stepper";
 import React from "react";
 import { useSelector } from "react-redux";
-import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   root: {
