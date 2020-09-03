@@ -6,9 +6,9 @@ import {
   successSavePolicyAction,
 } from "./../Actions/PayrollActions";
 import {
-  hideSpinnerAction,
   showSpinnerAction,
-} from "./../Actions/UISpinnerActions";
+  hideSpinnerAction,
+} from "./../../../Application/Redux/Actions/UISpinnerActions";
 
 export default function* watchSavePayPolicySaga() {
   yield takeLatest(SAVE_POLICY, savePayPolicySaga);
@@ -17,30 +17,18 @@ export default function* watchSavePayPolicySaga() {
 function* savePayPolicySaga(action) {
   yield put(showSpinnerAction("Saving pay policy..."));
 
+  yield new Promise(() => setTimeout(() => "Hello", 4000));
+
+  const { payload } = action;
   const {
     payload: { policyData },
   } = action;
-  const {
-    policyOwner,
-    policyOrigin,
-    policyAudience,
-    policyName,
-    policyStatement,
-    policyInitiator,
-    policyAssurance,
-  } = policyData;
 
-  const data = {
-    policyOwner,
-    policyOrigin,
-    policyAudience,
-    policyName,
-    policyStatement,
-    policyInitiator,
-    policyAssurance,
-  };
-
-  const savePolicyAPI = (url) => authService.post(url, data, config);
+  // const data = {
+  //   ...policyData
+  // };
+  const config = { headers: action.payload.authHeaders };
+  const savePolicyAPI = (url) => authService.post(url, policyData, config);
 
   try {
     const result = yield call(

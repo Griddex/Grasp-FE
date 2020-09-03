@@ -1,3 +1,4 @@
+export const PERSIST_POLICY_REDUX = "PERSIST_POLICY_REDUX";
 export const SHOW_IMPORTMODULES = "SHOW_IMPORTMODULES";
 export const HIDE_IMPORTMODULES = "HIDE_IMPORTMODULES";
 export const ADD_POLICYINITIATOR = "ADD_POLICYINITIATOR";
@@ -15,6 +16,18 @@ export const SUCCESS_SAVEPOLICY = "SUCCESS_SAVEPOLICY";
 export const FAILURE_SENDPOLICY = "FAILURE_SENDPOLICY";
 export const FAILURE_SAVEPOLICY = "FAILURE_SAVEPOLICY";
 
+export const persistPolicyDataToReduxAction = (target) => {
+  const { name, value } = target;
+
+  return {
+    type: PERSIST_POLICY_REDUX,
+    payload: {
+      name,
+      value,
+    },
+  };
+};
+
 export const importModulesOpenAction = () => ({
   type: SHOW_IMPORTMODULES,
   payload: { open: true },
@@ -30,7 +43,6 @@ export const addPolicyInitiatorAction = (initiator) => ({
   payload: {
     policyInitiator: initiator,
   },
-  //may be true if it'll fetch initiators from DB
 });
 
 export const showResetPolicyDialogAction = () => ({
@@ -87,7 +99,6 @@ export const savePolicyAction = (
 ) => ({
   type: SAVE_POLICY,
   payload: {
-    saving: true,
     policyData: {
       policyOwner,
       policyOrigin,
@@ -98,6 +109,7 @@ export const savePolicyAction = (
       policyAssurance,
     },
   },
+  meta: { addAuth: true },
 });
 
 export const showSendPolicyDialogAction = () => ({
@@ -125,7 +137,6 @@ export const sendPolicyAction = (
 ) => ({
   type: SEND_POLICY,
   payload: {
-    sending: true,
     policyData: {
       policyOwner,
       policyOrigin,
@@ -142,31 +153,27 @@ export const sendPolicyAction = (
 export const successSavePolicyAction = (result) => ({
   type: SUCCESS_SAVEPOLICY,
   payload: {
-    saving: false,
     result: result,
   },
 });
 
-export const failureSavePolicyAction = (result) => ({
+export const failureSavePolicyAction = (errors) => ({
   type: FAILURE_SAVEPOLICY,
   payload: {
-    saving: false,
-    result: result,
+    errors: errors,
   },
 });
 
 export const successSendPolicyAction = (result) => ({
   type: SUCCESS_SENDPOLICY,
   payload: {
-    sending: false,
     result: result,
   },
 });
 
-export const failureSendPolicyAction = (result) => ({
+export const failureSendPolicyAction = (errors) => ({
   type: FAILURE_SENDPOLICY,
   payload: {
-    sending: false,
-    result: result,
+    errors: errors,
   },
 });

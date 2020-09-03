@@ -87,6 +87,7 @@ export default function MainDialog({
   Content,
   Actions,
   handleHide,
+  maxWidth,
 }) {
   const classes = useDialogContentStyles();
 
@@ -94,7 +95,7 @@ export default function MainDialog({
     <Dialog
       aria-labelledby="customized-dialog-title"
       open={Open}
-      maxWidth="sm"
+      maxWidth={maxWidth}
       fullWidth
     >
       <DialogTitle

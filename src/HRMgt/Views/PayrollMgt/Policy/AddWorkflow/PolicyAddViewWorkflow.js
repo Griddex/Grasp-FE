@@ -1,5 +1,6 @@
 import { Divider, Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -16,6 +17,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import {
+  persistPolicyDataToReduxAction,
   addPolicyInitiatorAction,
   hideResetPolicyDialogAction,
   hideSavePolicyDialogAction,
@@ -126,6 +128,9 @@ const useStyles = makeStyles((theme) => ({
   },
   sideBySide: {
     display: "flex",
+    // "& > *": { padding: theme.spacing(0, 0, 0, 10) },
+    // "&:last-child": { padding: theme.spacing(0, 0, 0, 10) },
+    // "& > *": { "&:last-child": { padding: theme.spacing(0, 0, 0, 10) } },
   },
   openInNewOutlinedIcon: {
     height: 24,
@@ -134,6 +139,13 @@ const useStyles = makeStyles((theme) => ({
   },
   questionIcon: { height: 40, width: 40, color: "#FD8C2A" },
   cautionIcon: { height: 40, width: 40, color: theme.palette.secondary.main },
+  dialogMessage: {
+    marginBottom: 40,
+  },
+  summary: {
+    color: theme.palette.primary.main,
+    fontWeight: theme.typography.fontWeightBold,
+  },
 }));
 
 const PolicyAddViewWorkflow = () => {
@@ -150,8 +162,8 @@ const PolicyAddViewWorkflow = () => {
     sendPolicyDialogShow,
   } = policyData;
 
-  const values = ["hello", "Hi", "Welcome"];
-  const sendSaveDialogContent = (props) => {
+  const initiatorsList = ["hello", "Hi", "Welcome"];
+  const dialogMessage = (props) => {
     const {
       policyOwner,
       policyOrigin,
@@ -162,33 +174,54 @@ const PolicyAddViewWorkflow = () => {
 
     return (
       <>
+        <Typography className={classes.summary} variant="subtitle1">
+          Summary:
+        </Typography>
         <div className={classes.sideBySide}>
-          <h4>Policy Owner:</h4>
-          <h4>{policyOwner}</h4>
+          <Typography variant="subtitle1" gutterBottom>
+            Policy Owner:
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            {policyOwner}
+          </Typography>
         </div>
         <div className={classes.sideBySide}>
-          <h4>Policy Origin:</h4>
-          <h4>{policyOrigin}</h4>
+          <Typography variant="subtitle1" gutterBottom>
+            Policy Origin:
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            {policyOrigin}
+          </Typography>
         </div>
         <div className={classes.sideBySide}>
-          <h4>Policy Audience:</h4>
-          <h4>{policyAudience}</h4>
+          <Typography variant="subtitle1" gutterBottom>
+            Policy Audience:
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            {policyAudience}
+          </Typography>
         </div>
         <div className={classes.sideBySide}>
-          <h4>Policy Name:</h4>
-          <h4>{policyName}</h4>
+          <Typography variant="subtitle1" gutterBottom>
+            Policy Name:
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            {policyName}
+          </Typography>
         </div>
         <div className={classes.sideBySide}>
-          <h4>Policy Statement:</h4>
+          <Typography variant="subtitle1" gutterBottom>
+            Policy Statement:
+          </Typography>
           <OpenInNewOutlinedIcon className={classes.openInNewOutlinedIcon} />
         </div>
         <div className={classes.sideBySide}>
-          <h4>Policy Owner:</h4>
-          <h4>{policyInitiator}</h4>
-        </div>
-        <div className={classes.sideBySide}>
-          <h4>Policy Owner:</h4>
-          <h4>{policyInitiator}</h4>
+          <Typography variant="subtitle1" gutterBottom>
+            Policy Initiator:
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            {policyInitiator}
+          </Typography>
         </div>
       </>
     );
@@ -197,7 +230,9 @@ const PolicyAddViewWorkflow = () => {
   const ResetPolicyDialogContent = () => {
     return (
       <div>
-        <h4>Do you want to reset the current draft pay policy?</h4>
+        <Typography variant="h6" gutterBottom>
+          Do you want to reset the current pay policy?
+        </Typography>
       </div>
     );
   };
@@ -235,9 +270,10 @@ const PolicyAddViewWorkflow = () => {
   const SavePolicyDialogContent = (props) => {
     return (
       <div>
-        <h4>Do you want to save the following draft pay policy?</h4>
-        <h4>Summary</h4>
-        {sendSaveDialogContent(props)}
+        <Typography className={classes.dialogMessage} variant="h6" gutterBottom>
+          Do you want to save the following pay policy?
+        </Typography>
+        {dialogMessage(props)}
       </div>
     );
   };
@@ -275,8 +311,14 @@ const PolicyAddViewWorkflow = () => {
   const SendPolicyDialogContent = (props) => {
     return (
       <div>
-        <h4>Do you want to save the following draft pay policy?</h4>
-        {sendSaveDialogContent(props)}
+        <Typography
+          className={classes.dialogMessage}
+          variant="subtitle1"
+          gutterBottom
+        >
+          Do you want to send the following pay policy?
+        </Typography>
+        {dialogMessage(props)}
       </div>
     );
   };
@@ -324,7 +366,8 @@ const PolicyAddViewWorkflow = () => {
         Title="Reset Pay Policy"
         Content={<ResetPolicyDialogContent />}
         Actions={<ResetPolicyDialogActions />}
-        handleHide={hideResetPolicyDialogAction}
+        handleHide={() => dispatch(hideResetPolicyDialogAction())}
+        maxWidth="sm"
       />
       <MainDialog
         Open={savePolicyDialogShow}
@@ -332,7 +375,8 @@ const PolicyAddViewWorkflow = () => {
         Title="Save Pay Policy"
         Content={<SavePolicyDialogContent {...policyData} />}
         Actions={<SavePolicyDialogActions />}
-        handleHide={hideSavePolicyDialogAction}
+        handleHide={() => dispatch(hideSavePolicyDialogAction())}
+        maxWidth="sm"
       />
       <MainDialog
         Open={sendPolicyDialogShow}
@@ -340,7 +384,8 @@ const PolicyAddViewWorkflow = () => {
         Title="Send Pay Policy"
         Content={<SendPolicyDialogContent {...policyData} />}
         Actions={<SendPolicyDialogActions />}
-        handleHide={hideSendPolicyDialogAction}
+        handleHide={() => dispatch(hideSendPolicyDialogAction())}
+        maxWidth="sm"
       />
       <div className={classes.graspLogo}>
         <h4 className={classes.title}>COMPANY PAY POLICY</h4>
@@ -378,7 +423,6 @@ const PolicyAddViewWorkflow = () => {
               policyOrigin,
               policyAudience,
               policyName,
-              policyName,
               policyStatement,
               policyInitiator,
               policyAssurance
@@ -399,9 +443,14 @@ const PolicyAddViewWorkflow = () => {
             },
             errors,
             touched,
-            handleChange,
+            handleBlur,
             handleSubmit,
           } = props;
+
+          const handleBlurCustom = (event) => {
+            handleBlur(event);
+            dispatch(persistPolicyDataToReduxAction(event.target));
+          };
 
           return (
             <form className={classes.form} onSubmit={handleSubmit}>
@@ -410,52 +459,58 @@ const PolicyAddViewWorkflow = () => {
                   <TextField
                     className={classes.textField}
                     name="policyOwner"
-                    helperText={touched.policyOwner ? errors.policyOwner : ""}
-                    error={Boolean(errors.policyOwner)}
+                    helperText={errors[policyOwner] ? errors[policyOwner] : ""}
+                    error={Boolean(errors[policyOwner] && touched[policyOwner])}
                     label="Policy Owner"
                     value={policyOwner}
-                    onChange={handleChange}
+                    onBlur={handleBlurCustom}
                   />
                   <TextField
                     className={classes.policyDate}
                     name="policyDate"
-                    helperText={touched.policyDate ? errors.policyDate : ""}
-                    error={Boolean(errors.policyDate)}
+                    helperText={errors[policyDate] ? errors[policyDate] : ""}
+                    error={Boolean(errors[policyDate] && touched[policyDate])}
                     label="Policy Date"
                     value={policyDate}
-                    onChange={handleChange}
+                    onBlur={handleBlurCustom}
                     type="datetime-local"
                   />
                 </div>
                 <div className={classes.policyOriginAudience}>
                   <TextField
                     name="policyOrigin"
-                    helperText={touched.policyOrigin ? errors.policyOrigin : ""}
-                    error={Boolean(errors.policyOrigin)}
+                    helperText={
+                      errors[policyOrigin] ? errors[policyOrigin] : ""
+                    }
+                    error={Boolean(
+                      errors[policyOrigin] && touched[policyOrigin]
+                    )}
                     label="Policy Origin"
                     value={policyOrigin}
-                    onChange={handleChange}
+                    onBlur={handleBlurCustom}
                   />
                   <TextField
                     name="policyAudience"
                     helperText={
-                      touched.policyAudience ? errors.policyAudience : ""
+                      errors[policyAudience] ? errors[policyAudience] : ""
                     }
-                    error={Boolean(errors.policyAudience)}
+                    error={Boolean(
+                      errors[policyAudience] && touched[policyAudience]
+                    )}
                     label="Policy Audience"
                     value={policyAudience}
-                    onChange={handleChange}
+                    onBlur={handleBlurCustom}
                   />
                 </div>
                 <Grid item container direction="row" justify="flex-start">
                   <TextField
                     className={classes.policyName}
                     name="policyName"
-                    helperText={touched.policyName ? errors.policyName : ""}
-                    error={Boolean(errors.policyName)}
+                    helperText={errors[policyName] ? errors[policyName] : ""}
+                    error={Boolean(errors[policyName] && touched[policyName])}
                     label="Policy Name"
                     value={policyName}
-                    onChange={handleChange}
+                    onBlur={handleBlurCustom}
                   />
                 </Grid>
                 <Grid item container direction="row" justify="flex-start">
@@ -463,12 +518,14 @@ const PolicyAddViewWorkflow = () => {
                     className={classes.policyStatement}
                     name="policyStatement"
                     helperText={
-                      touched.policyStatement ? errors.policyStatement : ""
+                      errors[policyStatement] ? errors[policyStatement] : ""
                     }
-                    error={Boolean(errors.policyStatement)}
+                    error={Boolean(
+                      errors[policyStatement] && touched[policyStatement]
+                    )}
                     label="Policy Statement"
                     value={policyStatement}
-                    onChange={handleChange}
+                    onBlur={handleBlurCustom}
                     rows={13}
                     multiline
                   />
@@ -478,15 +535,17 @@ const PolicyAddViewWorkflow = () => {
                     className={classes.policyInitiatorInput}
                     name="policyInitiator"
                     helperText={
-                      touched.policyInitiator ? errors.policyInitiator : ""
+                      errors[policyInitiator] ? errors[policyInitiator] : ""
                     }
-                    error={Boolean(errors.policyInitiator)}
+                    error={Boolean(
+                      errors[policyInitiator] && touched[policyInitiator]
+                    )}
                     label="Policy Initiator"
                     value={policyInitiator}
-                    onChange={handleChange}
+                    onBlur={handleBlurCustom}
                     select
                   >
-                    {values.map((option, i) => (
+                    {initiatorsList.map((option, i) => (
                       <MenuItem key={i} value={option}>
                         {option}
                       </MenuItem>

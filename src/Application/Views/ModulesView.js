@@ -1,4 +1,3 @@
-import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -16,6 +15,16 @@ import { ReactComponent as Grasptitlelogo } from "../Images/Grasptitlelogo.svg";
 import Modules from "../Modules/Modules";
 // import Image from "./../Components/Image";
 import { hideModulesViewAction } from "./../Redux/Actions/ModuleActions";
+import MainDialog from "./../../HRMgt/Components/MainDialog";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import { useDispatch } from "react-redux";
+import { hideSpinnerAction } from "../../Application/Redux/Actions/UISpinnerActions";
+import SaveOutlinedIcon from "@material-ui/icons/SaveOutlined";
+import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
+import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,13 +39,57 @@ const useStyles = makeStyles((theme) => ({
     height: 80,
     width: 70,
   },
+  circularProgress: { height: 150, width: 150, bottomMargin: 20 },
+  saveIcon: { height: 40, width: 40, color: `${green[700]}` },
 }));
+
+const ProgressDialog = (props) => {
+  const { message, classes } = props;
+
+  return (
+    <Grid container direction="column" alignItems="center">
+      <CircularProgress className={classes.circularProgress} />
+      <Typography variant="subtitle1" gutterBottom>
+        {message}
+      </Typography>
+    </Grid>
+  );
+};
+
+const CancelProgressDialogActions = (props) => {
+  const { dispatch } = props;
+
+  const buttonsData = [
+    {
+      title: "Cancel",
+      variant: "contained",
+      color: "secondary",
+      startIcon: <CloseOutlinedIcon />,
+      handleAction: () => dispatch(hideSpinnerAction()),
+    },
+  ];
+
+  return buttonsData.map((button) => (
+    <Button
+      variant={button.variant}
+      color={button.color}
+      onClick={button.handleAction}
+      startIcon={button.startIcon}
+    >
+      {button.title}
+    </Button>
+  ));
+};
 
 const ModulesView = () => {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
   const showModulesView = useSelector(
     (state) => state.modulesReducer.showModulesView
   );
+  const pending = useSelector((state) => state.uiSpinnerReducer.pending);
+  const message = useSelector((state) => state.uiSpinnerReducer.message);
   const { url, path } = useRouteMatch();
 
   const data = [
@@ -150,6 +203,16 @@ const ModulesView = () => {
           }}
         />
       )}
+      <MainDialog
+        Open={pending}
+        Icon={<SaveOutlinedIcon className={classes.saveIcon} />}
+        Title="Saving"
+        Content={<ProgressDialog message={message} classes={classes} />}
+        Actions={<CancelProgressDialogActions dispatch={dispatch} />} //Implement ability to cancel operation
+        handleHide={() => dispatch(hideSpinnerAction())}
+        maxWidth="xs"
+      />
+      {/*Need to generalize the MainDialog component to accept  */}
     </>
   );
 };

@@ -1,4 +1,5 @@
 import {
+  PERSIST_POLICY_REDUX,
   SHOW_IMPORTMODULES,
   HIDE_IMPORTMODULES,
   ADD_POLICYINITIATOR,
@@ -21,6 +22,15 @@ import payrollState from "./../State/PayrollState";
 
 const payrollReducer = (state = payrollState, action) => {
   switch (action.type) {
+    case PERSIST_POLICY_REDUX:
+      return {
+        ...state,
+        policy: {
+          ...state.policy,
+          [action.payload.name]: action.payload.value,
+        },
+      };
+
     case SHOW_IMPORTMODULES:
       return { ...state, showImportModulesView: action.payload.open };
 

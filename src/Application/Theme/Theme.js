@@ -73,12 +73,20 @@ theme.overrides = {
   },
   MuiInputLabel: {
     root: {
-      textTransform: "uppercase",
+      // textTransform: "uppercase",
       fontSize: "1.0rem",
     },
   },
   MuiInputBase: {
-    root: { height: 36, borderRadius: 2 },
+    root: {
+      height: 36,
+      borderRadius: 2,
+      "&:hover": { backgroundColor: theme.palette.primary.light },
+    },
+    input: {
+      "&:hover": { backgroundColor: theme.palette.primary.light },
+      "&:focus": { backgroundColor: theme.palette.primary.light },
+    },
   },
   MuiInput: {
     root: {
@@ -105,6 +113,7 @@ theme.overrides = {
   },
   MuiDialogTitle: { root: { padding: theme.spacing(1) } },
   MuiDialogContent: { dividers: { borderWidth: 0 } },
+  MuiSvgIcon: { root: { cursor: "pointer" } },
 };
 
 export default theme;
