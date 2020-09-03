@@ -4,24 +4,26 @@ import StepLabel from "@material-ui/core/StepLabel";
 import Stepper from "@material-ui/core/Stepper";
 import React from "react";
 import { useSelector } from "react-redux";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    padding: 0,
+    padding: 10,
     "& > *": {
       alignItems: "center",
     },
   },
+  label: { fontSize: 10 },
+  hide: { display: "none" },
 }));
 
 const WorkflowStepper = (props) => {
   const classes = useStyles();
 
   const { steps, activeStep, skipped, errorSteps } = props;
-
   //   const steps = useSelector(
   //     (state) => state.layoutReducer.contextWorkflow.steps
   //   );
@@ -57,9 +59,17 @@ const WorkflowStepper = (props) => {
 
         return (
           <Step key={label} {...stepProps}>
-            <StepLabel {...labelProps}>
+            <StepLabel className={classes.label} {...labelProps}>
               {contextDrawerExpanded && label}
             </StepLabel>
+            {/* <StepLabel
+              className={clsx(classes.label, {
+                [classes.hide]: !contextDrawerExpanded,
+              })}
+              {...labelProps}
+            >
+              {label}
+            </StepLabel> */}
           </Step>
         );
       })}

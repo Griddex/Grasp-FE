@@ -34,7 +34,6 @@ export const registerSuccessAction = () => {
     payload: {
       success: true,
     },
-    meta: { addAuth: false },
   };
 };
 
@@ -44,6 +43,5 @@ export const registerFailureAction = () => {
     payload: {
       success: false,
     },
-    meta: { addAuth: false },
   };
 };

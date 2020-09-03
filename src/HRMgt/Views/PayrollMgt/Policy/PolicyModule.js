@@ -14,19 +14,23 @@ import PolicyAddView from "./AddWorkflow/PolicyAddView";
 import PolicyImportView from "./ImportWorkflow/PolicyImportView";
 import PolicyBackground from "./PolicyBackground";
 
+const NavbarHeight = 45;
+const SubNavbarHeight = 30;
+const marginTop = NavbarHeight + SubNavbarHeight;
 const useStyles = makeStyles((theme) => ({
-  root: {
+  policyRoot: {
     display: "flex",
     height: "100%",
     width: "100%",
   },
-  main: {
+  policyMain: {
     display: "flex",
-    marginTop: 60,
-    width: "100%",
-    height: "calc(100%-60px)",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: marginTop,
+    width: "100%",
+    height: `calc(100% - ${marginTop}px)`,
+    padding: theme.spacing(2),
   },
 }));
 
@@ -78,7 +82,7 @@ const PolicyModule = (props) => {
   const WorkflowStepperProps = { steps, activeStep, skipped, errorSteps };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.policyRoot}>
       {/* {subNavbarPresent && <SubNavbar subNavbarItems={subNavbarItems} />} */}
       <SubNavbar subNavbarItems={subNavbarItems} />
       {contextDrawerPresent && (
@@ -86,7 +90,7 @@ const PolicyModule = (props) => {
           <WorkflowStepper {...WorkflowStepperProps} />
         </ContextDrawer>
       )}
-      <main className={classes.main}>
+      <main className={classes.policyMain}>
         <Switch>
           <Route exact path={path} component={PolicyBackground} />
           <Route

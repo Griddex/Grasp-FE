@@ -1,12 +1,9 @@
-import { useSelector } from "react-redux";
-
-const authMiddleware = () => (next) => (action) => {
-  console.log("Logged output -->: authMiddleware -> action", action);
+const authMiddleware = ({ getState }) => (next) => (action) => {
   const falsies = [null, undefined, false, ""];
   if (falsies.some((value) => value === action.meta)) return next(action);
 
   if (action.meta.addAuth) {
-    const authToken = useSelector((state) => state.loginReducer.authToken);
+    const authToken = getState().loginReducer.authToken;
 
     const { payload } = action;
     const actionAuth = {

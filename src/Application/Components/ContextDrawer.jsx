@@ -1,4 +1,4 @@
-import { Drawer } from "@material-ui/core";
+// import { Drawer } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -11,22 +11,31 @@ import {
   contextDrawerCollapseAction,
 } from "../Redux/Actions/LayoutActions";
 
-const NavBarHeight = 45;
+const ContextDrawerWidthExpanded = 150;
+// const ContextDrawerWidthCollapsed = 40
+const NavbarHeight = 45;
+const SubNavbarHeight = 30;
+const marginTop = NavbarHeight + SubNavbarHeight;
 const useStyles = makeStyles((theme) => ({
   hide: {
     display: "none",
   },
   contextDrawer: {
     display: "flex",
+    flexDirection: "column",
     flexShrink: 0,
-    marginTop: NavBarHeight,
-    whiteSpace: "nowrap",
+    position: "absolute",
+    right: 0,
+    marginTop: marginTop,
+    height: (props) => {
+      return `calc(100% - ${marginTop}px)`;
+    },
+    width: ContextDrawerWidthExpanded,
+    backgroundColor: "#FFFFFF",
+    zIndex: theme.zIndex.drawer,
   },
   contextDrawerExpanded: {
     width: 150,
-    height: (props) => {
-      return `calc(100%-${NavBarHeight}px)`;
-    },
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -34,9 +43,6 @@ const useStyles = makeStyles((theme) => ({
   },
   contextDrawerCollapsed: {
     width: 40,
-    height: (props) => {
-      return `calc(100%-${NavBarHeight}px)`;
-    },
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -52,41 +58,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ContextDrawer = ({ children }) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const contextDrawerExpanded = useSelector(
     (state) => state.layoutReducer.contextDrawerExpanded
   );
 
-  const classes = useStyles();
-
   return (
-    <Drawer
-      variant="permanent"
-      anchor="right"
+    <div
       className={clsx(classes.contextDrawer, {
         [classes.contextDrawerExpanded]: contextDrawerExpanded,
         [classes.contextDrawerCollapsed]: !contextDrawerExpanded,
       })}
-      classes={{
-        paper: clsx(classes.contextDrawer, {
-          [classes.contextDrawerExpanded]: contextDrawerExpanded,
-          [classes.contextDrawerCollapsed]: !contextDrawerExpanded,
-        }),
-      }}
     >
-      {!contextDrawerExpanded ? (
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={() => dispatch(contextDrawerExpandAction())}
-          edge="start"
-          className={clsx(classes.contextDrawerMenuIcon, {
-            [classes.hide]: contextDrawerExpanded,
-          })}
-        >
-          <MenuIcon />
-        </IconButton>
-      ) : (
+      {contextDrawerExpanded ? (
         <IconButton
           color="inherit"
           aria-label="close drawer"
@@ -98,10 +83,63 @@ const ContextDrawer = ({ children }) => {
         >
           <ChevronRightIcon />
         </IconButton>
+      ) : (
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={() => dispatch(contextDrawerExpandAction())}
+          edge="start"
+          className={clsx(classes.contextDrawerMenuIcon, {
+            [classes.hide]: contextDrawerExpanded,
+          })}
+        >
+          <MenuIcon />
+        </IconButton>
       )}
       {children}
-    </Drawer>
+    </div>
   );
+  // return (
+  //   <Drawer
+  //     variant="persistent"
+  //     anchor="right"
+  //     open={contextDrawerExpanded}
+  //     // className={clsx(classes.contextDrawer, {
+  //     //   [classes.contextDrawerExpanded]: contextDrawerExpanded,
+  //     //   [classes.contextDrawerCollapsed]: !contextDrawerExpanded,
+  //     // })}
+  //     classes={{
+  //       paper: classes.contextDrawer,
+  //     }}
+  //   >
+  //     {contextDrawerExpanded ? (<IconButton
+  //         color="inherit"
+  //         aria-label="close drawer"
+  //         onClick={() => dispatch(contextDrawerCollapseAction())}
+  //         edge="start"
+  //         className={clsx(classes.menuButton, {
+  //           [classes.hide]: !contextDrawerExpanded,
+  //         })}
+  //       >
+  //         <ChevronRightIcon />
+  //       </IconButton>
+
+  //     ) : (
+  //       <IconButton
+  //         color="inherit"
+  //         aria-label="open drawer"
+  //         onClick={() => dispatch(contextDrawerExpandAction())}
+  //         edge="start"
+  //         className={clsx(classes.contextDrawerMenuIcon, {
+  //           [classes.hide]: contextDrawerExpanded,
+  //         })}
+  //       >
+  //         <MenuIcon />
+  //       </IconButton>
+  //     )}
+  //     {children}
+  //   </Drawer>
+  // );
 };
 
 export default React.memo(ContextDrawer);

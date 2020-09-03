@@ -13,7 +13,7 @@ import TuneIcon from "@material-ui/icons/Tune";
 import React from "react";
 import { ReactComponent as Logo } from "../Images/GraspLogo.svg";
 
-const NavBarHeight = 45;
+const NavbarHeight = 45;
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 10,
     backgroundColor: "rgba(250,250,250, 1)",
     color: "#555555",
-    height: NavBarHeight,
+    height: NavbarHeight,
   },
   menuButton: {
     marginRight: theme.spacing(0),

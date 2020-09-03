@@ -62,7 +62,7 @@ const HomeView = (props) => {
             color="primary"
             onClick={() => history.push("/login")}
           >
-            Proceed
+            Login
           </Button>
         </div>
       </Grid>

@@ -4,40 +4,59 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import React from "react";
-import { ReactComponent as Logo } from "../../Application/Images/GraspLogo.svg";
+import { ReactComponent as Grasptitlelogo } from "../../Application/Images/Grasptitlelogo.svg";
 import GraspFooter from "../../ProjectMgt/Components/GraspFooter";
 import { LoginForm } from "../Components/LoginForm";
 //backgroundColor: theme.palette.common.white,
 //avatar: backgroundColor: "#ff9900"
+//lockicon color: "#0099FF"
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexWrap: "nowrap",
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
     height: "100%",
   },
-  logo: {
-    height: 230,
-    width: 210,
-  },
-  "@global": {
-    body: {
-      backgroundColor: "#EFEFEF",
-    },
-  },
-  paper: {
+  container: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    [theme.breakpoints.up("sm")]: { width: "30%" },
-    [theme.breakpoints.between("xs", "sm")]: { width: "70%" },
-    [theme.breakpoints.down("xs")]: { width: "80%" },
+    justifyContent: "center",
+    height: "100%",
+    [theme.breakpoints.up("md")]: { width: 557 },
+    [theme.breakpoints.between("xs", "md")]: { width: 557 },
+    [theme.breakpoints.down("xs")]: { width: "100%" },
+  },
+  grasptitlelogoContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "35%",
+  },
+  grasptitlelogo: {
+    height: 230,
+    width: 210,
+    alignSelf: "center",
+  },
+  formContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    height: "60%",
+    "& > *": { marginTop: 40 },
+  },
+  footerContainer: { height: "5%" },
+  loginForm: {
+    "& > *": {
+      marginLeft: 0,
+      marginTop: 25,
+    },
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: "#0099FF", // theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    backgroundColor: theme.palette.primary.main,
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -49,24 +68,22 @@ const LoginView = (props) => {
   const classes = useStyles();
 
   return (
-    <Grid
-      container
-      className={classes.root}
-      direction="column"
-      justify="center"
-      alignItems="center"
-    >
-      <div className={classes.paper}>
-        <Logo className={classes.logo} />
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <LoginForm />
+    <div className={classes.root}>
+      <div className={classes.container}>
+        <div className={classes.grasptitlelogoContainer}>
+          <Grasptitlelogo className={classes.grasptitlelogo} />
+        </div>
+        <div className={classes.formContainer}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <LoginForm />
+        </div>
+        <div className={classes.footerContainer}>
+          <GraspFooter />
+        </div>
       </div>
-      <Box mt={5}>
-        <GraspFooter />
-      </Box>
-    </Grid>
+    </div>
   );
 };
 

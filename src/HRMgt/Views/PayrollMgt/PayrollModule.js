@@ -10,13 +10,6 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     width: "100%",
   },
-  main: {
-    display: "flex",
-    height: "100%",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
 }));
 
 const PayrollModule = (props) => {
@@ -24,7 +17,6 @@ const PayrollModule = (props) => {
   const { path } = useRouteMatch();
 
   return (
-    // <div className={classes.root}>
     <Switch className={classes.root}>
       <Route exact path={path} component={PayrollBackground} />
       <Route
@@ -53,7 +45,6 @@ const PayrollModule = (props) => {
         render={(props) => <h1>No match for payroll module</h1>}
       />
     </Switch>
-    // </div>
   );
 };
 

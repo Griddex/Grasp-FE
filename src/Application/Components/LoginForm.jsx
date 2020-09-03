@@ -20,7 +20,11 @@ const useStyles = makeStyles((theme) => ({
   form: {
     display: "flex",
     flexDirection: "column",
-    "& > *": { marginLeft: 0 },
+    justifyContent: "center",
+    height: "45%",
+  },
+  formTextFields: {
+    "& > *": { marginTop: 40, "& .MuiInputBase-root": { height: 44 } },
   },
   button: {
     height: 36,
@@ -40,36 +44,31 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className={classes.form}>
-      <Formik
-        className={classes.form}
-        initialValues={loginState}
-        validationSchema={Yup.object().shape({
-          companyIdentifier: Yup.string(),
-          userName: Yup.string().required("Username is required"),
-          password: Yup.string().required("Password is required"),
-        })}
-        onSubmit={({ companyIdentifier, userName, password }) => {
-          console.log(
-            "Logged output -->: LoginForm -> companyIdentifier",
-            companyIdentifier
-          );
-          dispatch(loginAction(companyIdentifier, userName, password));
-        }}
-      >
-        {(props) => {
-          const {
-            values: { companyIdentifier, userName, password },
-            errors,
-            touched,
-            handleChange,
-            isValid,
-            handleSubmit,
-            status,
-          } = props;
+    <Formik
+      initialValues={loginState}
+      validationSchema={Yup.object().shape({
+        companyIdentifier: Yup.string(),
+        userName: Yup.string().required("Username is required"),
+        password: Yup.string().required("Password is required"),
+      })}
+      onSubmit={({ companyIdentifier, userName, password }) => {
+        dispatch(loginAction(companyIdentifier, userName, password));
+      }}
+    >
+      {(props) => {
+        const {
+          values: { companyIdentifier, userName, password },
+          errors,
+          touched,
+          handleChange,
+          isValid,
+          handleSubmit,
+          status,
+        } = props;
 
-          return (
-            <form onSubmit={handleSubmit}>
+        return (
+          <form className={classes.form} onSubmit={handleSubmit}>
+            <div className={classes.formTextFields}>
               <TextField
                 name="companyIdentifier"
                 helperText={
@@ -77,43 +76,27 @@ export const LoginForm = () => {
                 }
                 error={Boolean(errors.companyIdentifier)}
                 label="Company Identifier"
-                margin="normal"
-                variant="outlined"
                 value={companyIdentifier}
                 onChange={handleChange}
                 autoFocus
                 fullWidth
-              />
-              <ErrorMessage
-                name="companyIdentifier"
-                component="div"
-                className="invalid-feedback"
               />
               <TextField
                 name="userName"
                 helperText={touched.userName ? errors.userName : ""}
                 error={Boolean(errors.userName)}
                 label="userName"
-                margin="normal"
-                variant="outlined"
                 value={userName}
                 onChange={handleChange}
                 autoFocus
                 fullWidth
-              />
-              <ErrorMessage
-                name="userName"
-                component="div"
-                className="invalid-feedback"
               />
               <TextField
                 name="password"
                 helperText={touched.password ? errors.password : ""}
                 error={Boolean(errors.password)}
                 label="Password"
-                margin="normal"
                 autoComplete="current-password"
-                variant="outlined"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -132,44 +115,44 @@ export const LoginForm = () => {
                 onChange={handleChange}
                 fullWidth
               />
-              <div>{errors.password}</div>
-              {pending && (
-                <img
-                  alt="loading..."
-                  src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-                />
-              )}
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+            </div>
+            <div>{errors.password}</div>
+            {pending && (
+              <img
+                alt="loading..."
+                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
               />
-              <Button
-                className={classes.button}
-                type="submit"
-                variant="contained"
-                color="primary"
-                disabled={!isValid}
-                fullWidth
-              >
-                Submit
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="/register" variant="body2">
-                    {" Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
+            )}
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              className={classes.button}
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={!isValid}
+              fullWidth
+            >
+              Submit
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
               </Grid>
-              {status && <div className={"alert alert-danger"}>{status}</div>}
-            </form>
-          );
-        }}
-      </Formik>
-    </div>
+              <Grid item>
+                <Link href="/register" variant="body2">
+                  {" Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+            {status && <div className={"alert alert-danger"}>{status}</div>}
+          </form>
+        );
+      }}
+    </Formik>
   );
 };

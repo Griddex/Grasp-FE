@@ -5,7 +5,7 @@ import uiSpinnerState from "./../State/UISpinnerState";
 const uiSpinnerReducer = (state = uiSpinnerState, action) => {
   switch (action.type) {
     case SHOW_SPINNER:
-      return { ...state, pending: true };
+      return { ...state, pending: true, message: action.payload.message };
 
     case HIDE_SPINNER:
       return { ...state, pending: false };

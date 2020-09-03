@@ -16,8 +16,7 @@ export default function* watchLoginSaga() {
 }
 
 function* loginSaga(action) {
-  console.log("Logged output -->: function*loginSaga -> action", action);
-  yield put(showSpinnerAction());
+  yield put(showSpinnerAction("logging in..."));
 
   const { payload } = action;
   const { companyIdentifier, userName } = payload;

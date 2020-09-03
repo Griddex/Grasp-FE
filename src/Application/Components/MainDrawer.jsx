@@ -26,18 +26,21 @@ import {
   mainDrawerCollapseAction,
 } from "../Redux/Actions/LayoutActions";
 import "../Modules/Styles/Modules.scss";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
   sidebarHeaderHidden: {
     height: 45,
+    top: 0,
   },
   sidebarHeader: {
     display: "flex",
     height: 30,
+    top: 45,
     alignItems: "center",
     "& > *": {
       margin: theme.spacing(1),
@@ -45,14 +48,6 @@ const useStyles = makeStyles((theme) => ({
   },
   modulesViewIcon: {
     cursor: "pointer",
-  },
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-    top: 0,
-    left: 0,
   },
   menuIcon: {
     cursor: "pointer",
@@ -207,12 +202,13 @@ const allMenuItems = {
 
 export const MainDrawer = () => {
   const classes = useStyles();
+  const theme = useTheme();
   const dispatch = useDispatch();
   const history = useHistory();
   const { url } = useRouteMatch();
   const { activeModule: moduleActive } = useParams();
 
-  const mainDrawerOpen = useSelector(
+  const mainDrawerExpand = useSelector(
     (state) => state.layoutReducer.mainDrawerExpanded
   );
   const activeModule = useSelector(
@@ -224,84 +220,89 @@ export const MainDrawer = () => {
   const moduleUrl = `${url}`;
   const subModuleUrl = `${url}/PayrollManagement`;
 
+  const screenSizeIsXS = useMediaQuery(theme.breakpoints.down("xs"));
+  if (screenSizeIsXS) {
+    dispatch(mainDrawerCollapseAction());
+  } else {
+    dispatch(mainDrawerExpandAction());
+  }
+
   return (
-    <div className={classes.drawer} aria-label="Mailbox folders">
-      <ProSidebar collapsed={!mainDrawerOpen}>
-        <SidebarHeader className={classes.sidebarHeaderHidden}></SidebarHeader>
-        <div className={classes.sidebarHeader}>
-          {mainDrawerOpen ? (
-            <FirstPageIcon
-              className={classes.menuIcon}
-              onClick={(e) => dispatch(mainDrawerCollapseAction())}
-            />
-          ) : (
-            <MenuIcon
-              className={classes.menuIcon}
-              onClick={(e) => dispatch(mainDrawerExpandAction())}
-            />
-          )}
-          <ViewModuleIcon
-            className={classes.modulesViewIcon}
-            onClick={(e) => {
-              history.push("/grasp");
-              dispatch(showModulesViewAction());
-            }}
+    <ProSidebar collapsed={!mainDrawerExpand}>
+      <SidebarHeader className={classes.sidebarHeaderHidden}></SidebarHeader>
+      <div className={classes.sidebarHeader}>
+        {mainDrawerExpand ? (
+          <FirstPageIcon
+            className={classes.menuIcon}
+            onClick={(e) => dispatch(mainDrawerCollapseAction())}
           />
-          <Hidden xsDown>
-            <SearchIcon />
-            <FlagIcon />
-          </Hidden>
-        </div>
-        <Divider />
-        <SidebarContent>
-          <Menu iconShape="square" popperArrow>
-            {menuItems.map((menuItem, i) => {
-              const { caption, link, hasSubMenu, subMenuItems } = menuItem;
+        ) : (
+          <MenuIcon
+            className={classes.menuIcon}
+            onClick={(e) => dispatch(mainDrawerExpandAction())}
+          />
+        )}
+        <ViewModuleIcon
+          className={classes.modulesViewIcon}
+          onClick={(e) => {
+            history.push("/grasp");
+            dispatch(showModulesViewAction());
+          }}
+        />
+        <Hidden xsDown>
+          <SearchIcon />
+          <FlagIcon />
+        </Hidden>
+      </div>
+      <Divider />
+      <SidebarContent>
+        <Menu iconShape="square" popperArrow>
+          {menuItems.map((menuItem, i) => {
+            const { caption, link, hasSubMenu, subMenuItems } = menuItem;
 
-              if (hasSubMenu)
-                return (
-                  <SubMenu
-                    onClick={(e) => {
-                      history.push(`${moduleUrl}${link}`);
-                    }}
-                    key={i}
-                    title={caption}
-                    icon={<InboxIcon />}
-                  >
-                    {subMenuItems.map((menuItem, i) => {
-                      const { caption, link } = menuItem;
+            if (hasSubMenu)
+              return (
+                <SubMenu
+                  onClick={(e) => {
+                    history.push(`${moduleUrl}${link}`);
+                  }}
+                  key={i}
+                  title={caption}
+                  icon={<InboxIcon />}
+                >
+                  {subMenuItems.map((menuItem, i) => {
+                    const { caption, link } = menuItem;
 
-                      return (
-                        <MenuItem
-                          onClick={(e) => {
-                            history.push(`${subModuleUrl}${link}`);
-                          }}
-                          key={i}
-                          icon={<InboxIcon />}
-                        >
-                          {caption}
-                        </MenuItem>
-                      );
-                    })}
-                  </SubMenu>
-                );
-              else
-                return (
-                  <MenuItem
-                    onClick={(e) => {
-                      history.push(`${moduleUrl}${link}`);
-                    }}
-                    key={i}
-                    icon={<InboxIcon />}
-                  >
-                    {caption}
-                  </MenuItem>
-                );
-            })}
-          </Menu>
-        </SidebarContent>
-        <SidebarFooter></SidebarFooter>
-      </ProSidebar>
-    </div>
+                    return (
+                      <MenuItem
+                        onClick={(e) => {
+                          history.push(`${subModuleUrl}${link}`);
+                        }}
+                        key={i}
+                        icon={<InboxIcon />}
+                      >
+                        {caption}
+                      </MenuItem>
+                    );
+                  })}
+                </SubMenu>
+              );
+            else
+              return (
+                <MenuItem
+                  onClick={(e) => {
+                    history.push(`${moduleUrl}${link}`);
+                  }}
+                  key={i}
+                  icon={<InboxIcon />}
+                >
+                  {caption}
+                </MenuItem>
+              );
+          })}
+        </Menu>
+      </SidebarContent>
+      <SidebarFooter></SidebarFooter>
+    </ProSidebar>
   );
 };

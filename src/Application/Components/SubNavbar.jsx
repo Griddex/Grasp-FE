@@ -63,15 +63,15 @@ const SubNavbar = (props) => {
   const classes = useStyles();
   // const dispatch = useDispatch();
   // const { url, path } = useRouteMatch();
-  const mainDrawerOpen = useSelector(
+  const mainDrawerExpand = useSelector(
     (state) => state.layoutReducer.mainDrawerExpanded
   );
 
   return (
     <AppBar
       className={clsx(classes.appBar, {
-        [classes.appBarShiftExpanded]: mainDrawerOpen,
-        [classes.appBarShiftCollapsed]: !mainDrawerOpen,
+        [classes.appBarShiftExpanded]: mainDrawerExpand,
+        [classes.appBarShiftCollapsed]: !mainDrawerExpand,
       })}
     >
       <Toolbar className={classes.appbarToolBar} disableGutters>

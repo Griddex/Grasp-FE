@@ -24,9 +24,7 @@ export const deleteProject = (id) => {
       .then((result) => {
         dispatch({ type: "DELETE_PROJECT", id });
       })
-      .catch((ex) => {
-        console.error(ex);
-      });
+      .catch((ex) => {});
   };
 };
 
@@ -50,16 +48,13 @@ export const createProject = (project) => {
           },
         });
       })
-      .catch((ex) => {
-        console.error(ex);
-      });
+      .catch((ex) => {});
   };
 };
 
 export const updateProject = (project) => {
   return (dispatch, getState, { axios, enqueueSnackbarAction }) => {
     //Make async call to backend
-    console.log(project);
     axios
       .put("http://localhost:56941/api/projects/" + project.id, project, {
         headers: { "Access-Control-Allow-Origin": "*" },

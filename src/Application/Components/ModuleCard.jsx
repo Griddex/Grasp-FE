@@ -14,8 +14,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     textAlign: "center",
     flexDirection: "column",
-    // minWidth: cardWidth * 0.8,
-    // minHeight: cardWidth * 1.1,
     width: cardWidth,
     height: cardWidth * 1.3,
   },
@@ -34,8 +32,18 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     backgroundColor: "#F7F7F7",
   },
-  cardContentTitle: {
-    padding: 10,
+  cardDescription: {
+    width: "80%",
+    margin: "auto",
+    marginTop: "5%",
+    paddingLeft: 7,
+    borderStyle: "solid",
+    borderColor: theme.palette.primary.main,
+    borderLeftWidth: 2,
+    borderRightWidth: 0,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    textAlign: "left",
   },
 }));
 
@@ -66,7 +74,7 @@ export default function ModuleCard(props) {
       </CardActionArea>
       <CardContent className={classes.cardContent}>
         <Typography
-          className={classes.cardContentTitle}
+          className={classes.cardDescription}
           variant="body2"
           color="textSecondary"
           component="p"

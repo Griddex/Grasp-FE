@@ -3,10 +3,6 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export const loginAction = (companyIdentifier, userName, password) => {
-  console.log(
-    "Logged output -->: loginAction -> companyIdentifier",
-    companyIdentifier
-  );
   return {
     type: LOGIN_REQUEST,
     payload: {
@@ -14,7 +10,6 @@ export const loginAction = (companyIdentifier, userName, password) => {
       userName,
       password,
     },
-    meta: { addAuth: false },
   };
 };
 
@@ -24,7 +19,6 @@ export const loginSuccessAction = () => {
     payload: {
       token: null,
     },
-    meta: { addAuth: false },
   };
 };
 
@@ -34,6 +28,5 @@ export const loginFailureAction = () => {
     payload: {
       errors: [],
     },
-    meta: { addAuth: false },
   };
 };
